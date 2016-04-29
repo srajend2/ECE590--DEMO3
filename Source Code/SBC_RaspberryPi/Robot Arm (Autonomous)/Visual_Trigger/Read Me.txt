@@ -1,0 +1,1 @@
+Please run the Visual_Trigger_GreenBox.py file first which would keep checking for the captured frame if the object is present or not. If present, then it would trigger InvKin_Control.py file and start picking up the box and would place it in the precoded destination.

@@ -67,7 +67,15 @@ def convtheta(x,y,z):
 	ret_y = str(y).zfill(2)
 	return_theta_prt = ret_x+"/"+ret_y+"/"+slink1_theta+"/"+slink2_theta+"/"+sturn_theta
 	print return_theta_prt
-	return_theta = "1"+"/"+slink1_theta+"/"+"2"+"/"+slink2_theta+"/"+"4"+"/"+sturn_theta
+	#return_theta = "1"+"/"+slink1_theta+"/"+"2"+"/"+slink2_theta+"/"+"4"+"/"+sturn_theta
+	if grip_capture==1:
+		grip_theta="020"
+		return_theta = "1"+"/"+slink1_theta+"/"+"2"+"/"+slink2_theta+"/"+"3"+"/"+sturn_theta+"/"+"4"+"/"+grip_theta
+                print 'capturing'
+	else:
+		grip_theta="080"
+		return_theta = "1"+"/"+slink1_theta+"/"+"2"+"/"+slink2_theta+"/"+"3"+"/"+sturn_theta+"/"+"4"+"/"+grip_theta
+                print 'releasing'
 	return return_theta
 	
 while True:
@@ -134,6 +142,27 @@ while True:
 	    if((z1>=z1_init) and (z1<z1_max)):
 		z1=z1+0.5
 		theta_total=convtheta(x1,y1,z1)
+		sock.sendto(theta_total, (IP,PORT))
+		print theta_total
+
+	if "q" in ch:
+#                grip_capture=0
+		theta_total="1/020/2/100/3/290/4/020"
+		sock.sendto(theta_total, (IP,PORT))
+		print theta_total
+		time.sleep(4)
+		theta_total="1/020/2/030/3/290/4/020"
+		sock.sendto(theta_total, (IP,PORT))
+		print theta_total
+
+
+	if "a" in ch:
+#                grip_capture=0
+		theta_total="1/020/2/100/3/100/4/080"
+		sock.sendto(theta_total, (IP,PORT))
+		print theta_total
+		time.sleep(4)
+		theta_total="1/020/2/030/3/100/4/080"
 		sock.sendto(theta_total, (IP,PORT))
 		print theta_total
 
